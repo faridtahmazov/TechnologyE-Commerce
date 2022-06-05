@@ -63,7 +63,7 @@ public class AdminController {
         Category category = categoryService.findCategoryById(id);
         model.addAttribute("category", category);
 
-        return "redirect:/admin/categories";
+        return "categoriesAdd";
     }
 
     //Product Session
@@ -115,9 +115,19 @@ public class AdminController {
     @GetMapping("/admin/products/update/{id}")
     public String getProductUpdate(@PathVariable Long id, Model model){
         Product product = productService.findProductById(id);
-        model.addAttribute("product", product);
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(product.getId());
+        productDTO.setName(product.getName());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setWeight(product.getWeight());
+        productDTO.setImageName(product.getImageName());
+        productDTO.setCategoryId(product.getCategory().getId());
 
-        return "redirect:/admin/products";
+        model.addAttribute("categories", categoryService.findAllCategory());
+        model.addAttribute("productDTO", productDTO);
+
+        return "productsAdd";
     }
 
 }
