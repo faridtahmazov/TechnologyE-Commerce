@@ -20,7 +20,7 @@ public class HomeController {
     @GetMapping({"/", "/home"})
     public String home(Model model){
         model.addAttribute("cartCount", GlobalData.cart.size());
-
+        model.addAttribute("categories", categoryService.findAllCategory());
         return "index";
     }
 
