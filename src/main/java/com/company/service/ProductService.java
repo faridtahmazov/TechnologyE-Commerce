@@ -33,4 +33,8 @@ public class ProductService {
             throw new NullPointerException("Product not found in this id = " + id + "!");
         }
     }
+
+    public List<Product> findAllProductsByCategoryId(Integer id){
+        return productRepository.findAllByCategory_Id(id);
+    }
 }
